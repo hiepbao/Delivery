@@ -1,0 +1,133 @@
+﻿@model Delivery.Models.NhanVien_ChuaTK_Result
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var failMessage = TempData["FailMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(failMessage))
+{
+    <div id="notice" class="position-fixed" role="alert" style="bottom:5%; right:2%; width:32%; background-color: darkred; border-radius: 2.5rem;">
+        <div class="d-flex justify-content-around" style="height: 90px; position: relative;">
+
+            <i class="fas fa-check position-absolute top-50 translate-middle-y p-4 text-center"
+               style="background-color: red; border-radius:50%; color:white; left:10%;"></i>
+
+            <div class="position-absolute top-50 translate-middle-y" style="right:25%; color:white;">
+                <h5>@failMessage</h5>
+            </div>
+
+        </div>
+    </div>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+        <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
+            <h4>Thêm nhân viên</h4>
+            <hr />
+            @Html.ValidationMessage("CreateFailed", new { @class = "text-danger" })
+
+            <div class="row mb-3">
+                <div class="col">
+                    @Html.DisplayName("Họ tên")
+                    <input type="text" class="form-control" name="TenNhanVien" placeholder="" required , maxlength="50" />
+                </div>
+                <div class="col">
+                    @Html.DisplayName("Ngày sinh")
+                    <input type="date" class="form-control" name="NgaySinh" placeholder="" required />
+                </div>
+                <div class="col">
+                    @Html.DisplayName("Email")
+                    <input type="email" class="form-control" name="Email" placeholder="" required />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    @Html.DisplayName("Số điện thoại")
+                    <input type="text" class="form-control" name="SoDienThoai" required placeholder="" />
+                </div>
+                <div class="col-4">
+                    @Html.DisplayName("Khu vực hoạt động")
+                    @Html.DropDownList("MaKhuVuc", null, new { @class = "form-select" })
+                </div>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                @Html.ActionLink("Hủy", "Index", "NhanViens", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+                <input type="submit" value="Thêm" class="btn btn-success" style="border-radius: 1.5rem; width: 100px;" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>$(document).ready(function () {
+
+        if ($("#notice").is(':visible')) {
+            $("#notice").css({ "position": "fixed", "bottom": "5%", "right": "2%" })
+
+            $("#notice").fadeIn(2500, function () {
+                $("#notice").fadeOut(3000)
+            });
+        }
+    });</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@*@model Delivery.Models.NhanVien_ChuaTK_Result
+
+    @{
+        ViewBag.Title = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+            <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
+                <h4>Thêm nhân viên</h4>
+                <hr />
+                @Html.ValidationMessage("CreateFailed", new { @class = "text-danger" })
+
+                <div class="row mb-3">
+                    <div class="col">
+                        @Html.DisplayNameFor(model => model.TenNhanVien)
+                        @Html.TextBoxFor(model => model.TenNhanVien, new { @class = "form-control", required = "required", maxlength = "50" })
+                    </div>
+                    <div class="col">
+                        @Html.DisplayNameFor(model => model.NgaySinh)
+                        @Html.TextBoxFor(model => model.NgaySinh, new { @class = "form-control", type = "date", required = "required" })
+                    </div>
+                    <div class="col">
+                        @Html.DisplayNameFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email", required = "required" })
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4">
+                        @Html.DisplayNameFor(model => model.SoDienThoai)
+                        @Html.TextBoxFor(model => model.SoDienThoai, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="col-4">
+                        @Html.DisplayNameFor(model => model.MaKhuVuc)
+                        @Html.DropDownListFor(model => model.MaKhuVuc, ViewBag.MaKhuVucList as SelectList, new { @class = "form-select" })
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    @Html.ActionLink("Hủy", "Index", "NhanViens", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+                    <input type="submit" value="Thêm" class="btn btn-success" style="border-radius: 1.5rem; width: 100px;" />
+                </div>
+            </div>
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
