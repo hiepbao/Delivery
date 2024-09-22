@@ -26,7 +26,8 @@ namespace Delivery.Controllers
         {
             var dH_DaNhan = _dHs_DaNhanManager.GetAllDhs_DaNhan();
 
-            return View(dH_DaNhan.ToList());
+            //return View(dH_DaNhan.ToList());
+            return View(db.DonHang_GetListDonHang(1).ToList());
         }
 
         // GET: chi tiết đơn hàng đã nhận
@@ -36,7 +37,8 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var dH = _dHs_DaNhanManager.GetDhs_DaNhanById((int)id);
+            DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).SingleOrDefault();
+            //var dH = _dHs_DaNhanManager.GetDhs_DaNhanById((int)id);
             if (dH == null)
             {
                 return HttpNotFound();
@@ -51,7 +53,8 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var dH_PhanPhoi = _dHs_DaNhanManager.GetDhs_DaNhanById((int)id);
+            DonHang_Find_detail_Result dH_PhanPhoi = db.DonHang_Find_detail(id).SingleOrDefault();
+            //var dH_PhanPhoi = _dHs_DaNhanManager.GetDhs_DaNhanById((int)id);
             ViewBag.MaNhanVien = new SelectList(db.DonHang_PhanPhoiSelectList_KhuVuc_NhanVien(dH_PhanPhoi.DiaChiQuan), "MaNhanVien", "TenNhanVien");
             if (dH_PhanPhoi == null)
             {

@@ -23,8 +23,8 @@ namespace Delivery.Controllers
         public ActionResult Index()
         {
             var dhs = _dHsManager.GetAllDhs();
-            return View(dhs);
-            //return View(db.DonHang_GetListDonHang(1).ToList());
+            //return View(dhs);
+            return View(db.DonHang_GetListDonHang(1).ToList());
         }
 
         // : Hiển thị chi tiết đơn hàng chưa nhận
@@ -34,8 +34,8 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).SingleOrDefault();
-            var dH = _dHsManager.GetDhsById((int)id);
+            DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).SingleOrDefault();
+            //var dH = _dHsManager.GetDhsById((int)id);
             if (dH == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,8 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var dH = _dHsManager.GetDhsById((int)id);
+            DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).SingleOrDefault();
+            //var dH = _dHsManager.GetDhsById((int)id);
             if (dH == null)
             {
                 return HttpNotFound();
